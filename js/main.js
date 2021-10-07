@@ -555,7 +555,8 @@ function extractData(spacePadding, horizontalHeader, verticalHeader) {
             jOffset = 1;
         }
         for (j = 0; j < arr[i].length; j++) {
-            mergedData = table.mergeCells.mergedCellInfoCollection.getInfo(i, j);
+            //mergedData = table.mergeCells.mergedCellInfoCollection.getInfo(i, j);  // for older h.o.t.
+            mergedData = table.getPlugin('mergeCells').mergedCellsCollection.get(i, j);  // for h.o.t. 6.2.2
             if (mergedData) {
                 cell = {
                     x: mergedData.row + iOffset,
