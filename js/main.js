@@ -619,6 +619,9 @@ function extractData(spacePadding, horizontalHeader, verticalHeader) {
                     hAlign: hAlign
                 };
             }
+            if (mergedData) {
+                result[i + iOffset][j + jOffset].merged = true;
+            }
         }
     }
     vLen = getVLen(result, (i + iOffset - 1), (j + jOffset - 1));
@@ -653,7 +656,7 @@ function getVLen(arr, vMax, hMax) {
     for (i = vMax; i >= 0; i--) {
         for (j = 0; j <= hMax; j++) {
             item = arr[i][j];
-            if (!item.empty) {
+            if (!item.empty || item.merged) {
                 v = item.cell.x + item.cell.rowspan;
                 if (v > vLen) {
                     vLen = v;
@@ -671,7 +674,7 @@ function getHLen(arr, vMax, hMax) {
     for (j = hMax; j >= 0; j--) {
         for (i = 0; i <= vMax; i++) {
             item = arr[i][j];
-            if (!item.empty) {
+            if (!item.empty || item.merged) {
                 h = item.cell.y + item.cell.colspan;
                 if (h > hLen) {
                     hLen = h;
